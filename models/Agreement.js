@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 
 const agreementSchema = new mongoose.Schema(
   {
-    userName: {
+    name: {
       type: String,
       required: true,
       trim: true,
     },
-    userEmail: {
+    email: {
       type: String,
       required: true,
       trim: true,

@@ -18,11 +18,11 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "*",
+    origin: ["http://localhost:5173"],
     credentials: true,
   })
 );
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 app.use(express.json()); // For JSON body parsing
 
 app.get("/", (req, res) => {
@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 });
 
 // routes
-app.use(routes); 
+app.use(routes);
 
 // Start server
 app.listen(port, () => {

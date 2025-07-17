@@ -1,11 +1,11 @@
 const User = require("../models/User.js");
 
-const isUser = async (req, res, next) => {
-  const { user } = req.body;
+const verifyAdmin = async (req, res, next) => {
+  const user = req.user;
   const { email } = user;
 
   const findUser = await User.findOne({ email });
-  if (findUser.role !== "user") {
+  if (findUser.role !== "admin") {
     return res.status(409).json({
       message: "You are not authorized",
     });
@@ -14,6 +14,4 @@ const isUser = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  isUser,
-};
+module.exports = verifyAdmin;

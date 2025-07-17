@@ -28,11 +28,21 @@ const createUser = async (req, res) => {
   }
 };
 
-const allUsers = (req, res) => {
-  res.status(201).json("allUsers");
+const allUsers = async (req, res) => {
+  const email = req.query.email;
+  const user = await User.find({ email: { $ne: email } });
+  return res.status(200).json(user);
+};
+
+const getUser = async (req, res) => {
+  const email = req.query.email;
+  const user = await User.findOne({ email });
+
+  return res.status(200).json(user);
 };
 
 module.exports = {
   createUser,
   allUsers,
+  getUser,
 };

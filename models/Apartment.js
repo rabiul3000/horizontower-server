@@ -27,6 +27,12 @@ const apartmentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+
+    status: {
+      type: String,
+      enum: ["available", "not_available"],
+      default: "available",
+    },
   },
   {
     timestamps: true,
