@@ -27,13 +27,17 @@ const agreementSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    apartmentId: {
+      type: String,
+      required: true,
+    },
     rent: {
       type: Number,
       required: true,
     },
     status: {
       type: String,
-      enum: ["pending", "approved", "rejected"],
+      enum: ["pending", "accepted", "rejected"],
       default: "pending",
     },
   },
