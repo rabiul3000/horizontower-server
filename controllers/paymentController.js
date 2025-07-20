@@ -15,16 +15,30 @@ const createPaymentIntent = async (req, res) => {
 
     return res.json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
-   return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 };
 
 const savePayment = async (req, res) => {
   const payment = req.body;
-  const result = await Payment.create({
-    ...payment,
-  });
-  return res.status(201).json(result);
+  try {
+    const result = await Payment.create({
+      ...payment,
+    });
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.status(500).json("payment save error");
+  }
 };
 
-module.exports = { createPaymentIntent, savePayment };
+const paymentHistory = async (req, res) => {
+  const userEmail = req.user.email;
+  try {
+    const result = await Payment.find({ email: userEmail });
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json("payment save error");
+  }
+};
+
+module.exports = { createPaymentIntent, savePayment, paymentHistory };
