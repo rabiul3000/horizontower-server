@@ -43,7 +43,6 @@ const validateCoupon = async(req, res) => {
   const couponCode = req.body.couponCode;
 
   const coupon = await Coupon.findOne({ code: couponCode });
-  console.log(coupon);
   
   if (!coupon) {
     return res.status(404).json("Coupon not found");
@@ -51,7 +50,7 @@ const validateCoupon = async(req, res) => {
   if (coupon.status !== "active") {
     return res.status(400).json("Coupon is not active");
   }
-  return res.status(200).json(coupon.discount);
+  return res.status(200).json(coupon);
 };
 
 module.exports = {
