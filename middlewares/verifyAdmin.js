@@ -6,6 +6,7 @@ const verifyAdmin = async (req, res, next) => {
 
   const findUser = await User.findOne({ email });
   if (findUser.role !== "admin") {
+    
     return res.status(409).json({
       message: "You are not authorized",
     });

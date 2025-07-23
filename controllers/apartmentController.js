@@ -3,35 +3,58 @@ const Apartment = require("../models/Apartment");
 
 const allApartments = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 6;
-    const skip = (page - 1) * limit;
+    const { page, limit, fromRange, toRange } = req.query;
 
-    const fromRange = parseInt(req.query.fromRange) || 1215;
-    const toRange = parseInt(req.query.toRange) || 4900;
+    let filter = {};
+    let isRangeFilter = false;
 
-    // Filter apartments by rent range before pagination
-    const filter = {
-      rent: { $gte: fromRange, $lte: toRange },
-    };
+    // Add rent range filter if present
+    if (fromRange && toRange) {
+      filter.rent = {
+        $gte: parseInt(fromRange),
+        $lte: parseInt(toRange),
+      };
+      isRangeFilter = true;
+    }
 
-    const apartments = await Apartment.find(filter)
-      .skip(skip)
-      .limit(limit)
-      .exec();
+    let query = Apartment.find(filter);
 
+    // Only apply pagination when not doing a range search
+    let currentPage = null;
+    let totalPages = null;
+
+    if (!isRangeFilter) {
+      const pageNum = parseInt(page) || 1;
+      const limitNum = parseInt(limit) || 6;
+      const skip = (pageNum - 1) * limitNum;
+
+      query = query.skip(skip).limit(limitNum);
+
+      const total = await Apartment.countDocuments(filter);
+      currentPage = pageNum;
+      totalPages = Math.ceil(total / limitNum);
+    }
+
+    const apartments = await query.exec();
     const total = await Apartment.countDocuments(filter);
 
-    res.status(200).json({
+    const response = {
       data: apartments,
-      currentPage: page,
-      total: total,
-      totalPages: Math.ceil(total / limit),
-    });
+      total,
+    };
+
+    if (!isRangeFilter) {
+      response.currentPage = currentPage;
+      response.totalPages = totalPages;
+    }
+
+    res.status(200).json(response);
   } catch (error) {
+    console.error("Apartment Fetch Error:", error);
     res.status(500).json({ message: "Failed to fetch apartments", error });
   }
 };
+
 
 const apartmentsForAdmin = async (req, res) => {
   try {

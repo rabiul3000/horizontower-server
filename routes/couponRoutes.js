@@ -7,9 +7,9 @@ const verifyToken = require("../middlewares/verifyToken.js");
 const router = express.Router();
 
 router.get("/all",  allCoupons);
-router.post("/create", verifyAdmin, createCoupon);
+router.post("/create", verifyToken, verifyAdmin, createCoupon);
 
-router.patch("/change_status", verifyAdmin, couponsStatusChange);
+router.patch("/change_status", verifyToken, verifyAdmin, couponsStatusChange);
 router.post("/validate", verifyToken, verifyMember, validateCoupon);
 
 module.exports = router;

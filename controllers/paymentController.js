@@ -1,5 +1,3 @@
-const dotenv = require("dotenv");
-dotenv.config();
 const Stripe = require("stripe");
 const Payment = require("../models/Payment");
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
