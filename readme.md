@@ -1,4 +1,4 @@
-# HomeHorizon API
+# Horizon Tower API
 
 [![Node.js](https://img.shields.io/badge/node.js-16.x-green)](https://nodejs.org/)  
 [![Express](https://img.shields.io/badge/express-5.x-blue)](https://expressjs.com/)  
@@ -8,7 +8,7 @@
 
 ## Overview
 
-HomeHorizon API is the backend server for the **HomeHorizon Building Management System (BMS)** — a full-featured platform to manage apartments, users, agreements, payments, announcements, coupons, and more. It is built with Node.js, Express.js, and MongoDB, providing RESTful APIs secured with JWT-based using google firebase highly secure authentication and role-based access control.
+Horizon Tower API is the backend server for the **Horizon Tower Building Management System (BMS)** — a full-featured platform to manage apartments, users, agreements, payments, announcements, coupons, and more. It is built with Node.js, Express.js, and MongoDB, providing RESTful APIs secured with JWT-based using google firebase highly secure authentication and role-based access control.
 
 ---
 
@@ -27,7 +27,8 @@ Live Website:
 ## Repository
 
 Backend source code repository:  
-🔗 [https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-rabiul3000.git](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-rabiul3000.git)
+🔗 [https://github.com/rabiul3000/horizontower-server.git](https://github.com/rabiul3000/horizontower-server.git)
+<!-- 🔗 [https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-rabiul3000.git](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-rabiul3000.git) -->
 
 ---
 
@@ -59,7 +60,7 @@ Backend source code repository:
 
 ## Tech project structure
 ```
-homehorizon-api/
+Horizon Tower-api/
 ├── config/
 │   └── mongoInit.js            # MongoDB connection initialization
 ├── controllers/
